@@ -88,10 +88,11 @@ audioread==3.0.1                   # Multi-backend audio decoding (librosa depen
 soxr==0.5.0.post1                  # High-quality resampling (librosa optional backend)
 
 
-# ── PyTorch Ecosystem (CPU builds — see GPU note above) ──────
-torch==2.5.1                       # Deep learning framework
-torchaudio==2.5.1                  # Audio transforms, I/O, resampling (must match torch)
-torchvision==0.20.1                # Required by some HuggingFace pipelines
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.2.2
+torchaudio==2.2.2
+torchvision==0.17.2
 
 
 # ── HuggingFace / AI Model Ecosystem ─────────────────────────
