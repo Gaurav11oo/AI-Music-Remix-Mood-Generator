@@ -83,7 +83,7 @@ A full-stack AI-powered music application that enables users to upload audio fil
 
 1. **Clone and setup:**
 ```bash
-git clone [https://github.com/Gaurav11oo/portfolio-site.git](https://github.com/Gaurav11oo/AI-Music-Remix-Mood-Generator.git)
+git clone https://github.com/Gaurav11oo/AI-Music-Remix-Mood-Generator.git
 ```
 
 2. **Setup Backend:**
