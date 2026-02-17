@@ -1,49 +1,3 @@
-# # Flask Framework
-# Flask==3.0.0
-# Flask-CORS==4.0.0
-
-# # Audio Processing
-# librosa==0.10.1
-# soundfile==0.12.1
-# pydub==0.25.1
-# audioread==3.0.1
-
-# # AI/ML Libraries
-# torch==2.1.2
-# torchaudio==2.1.2
-# transformers==4.36.2
-# demucs==4.0.1
-# diffusers==0.25.0
-
-# # Audio Analysis
-# scipy==1.11.4
-# numpy==1.26.3
-# scikit-learn==1.4.0
-# xgboost==2.0.3
-
-# # Utilities
-# python-dotenv==1.0.0
-# requests==2.31.0
-# Pillow==10.2.0
-# matplotlib==3.8.2
-
-# # Optional: For advanced music generation
-# # audiocraft (Meta's MusicGen)
-# # music-tag==0.4.3
-
-# ============================================================
-# requirements.txt
-# AI Music Remix & Mood Generator — Python Dependencies
-# Updated for FastAPI backend (replaces Flask)
-# Tested on Python 3.10 / 3.11 / 3.12
-# ============================================================
-# Install:  pip install -r requirements.txt
-# GPU note: Replace torch lines with the CUDA variant:
-#   pip install torch==2.3.1+cu121 torchaudio==2.3.1+cu121 \
-#       --index-url https://download.pytorch.org/whl/cu121
-# ============================================================
-
-
 # ── Web Framework (FastAPI replaces Flask) ───────────────────
 fastapi==0.115.5
 uvicorn[standard]==0.32.1          # ASGI server (includes httptools + websockets)
@@ -87,13 +41,10 @@ pydub==0.25.1                      # Audio segment manipulation, format conversi
 audioread==3.0.1                   # Multi-backend audio decoding (librosa dependency)
 soxr==0.5.0.post1                  # High-quality resampling (librosa optional backend)
 
-
 --extra-index-url https://download.pytorch.org/whl/cpu
-
-torch==2.2.2
-torchaudio==2.2.2
-torchvision==0.17.2
-
+torch==2.2.2+cpu
+torchaudio==2.2.2+cpu
+torchvision==0.17.2+cpu
 
 # ── HuggingFace / AI Model Ecosystem ─────────────────────────
 transformers==4.47.0               # HuggingFace Transformers (AST, Whisper, etc.)
