@@ -51,7 +51,7 @@ transformers==4.47.0               # HuggingFace Transformers (AST, Whisper, etc
 accelerate==1.2.1                  # HuggingFace model acceleration / device mapping
 huggingface-hub==0.26.3            # Model download and caching
 tokenizers==0.21.0                 # Fast tokenizers (transformers dependency)
-safetensors==0.4.5                 # Safe model weight serialization
+safetensors==0.4.3 --only-binary=:all:  # Safe model weight serialization
 datasets==3.2.0                    # HuggingFace datasets (for training mood classifier)
 diffusers==0.32.1                  # Stable Diffusion / Riffusion pipelines
 
