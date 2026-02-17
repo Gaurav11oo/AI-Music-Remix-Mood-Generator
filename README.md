@@ -307,9 +307,9 @@ API_BASE_URL=http://localhost:5000
 # Database
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=music_remix_db
+DB_NAME=DB_NAME
 DB_USER=postgres
-DB_PASSWORD=Gaur@1av
+DB_PASSWORD=DB_PASSWORD
 
 # Redis
 REDIS_HOST=localhost
@@ -444,9 +444,6 @@ npm run test:e2e
 - Rate limiting on API endpoints
 - SQL injection prevention with Sequelize ORM
 
-## 📝 License
-
-MIT License - see LICENSE file for details
 
 ## 🤝 Contributing
 
@@ -456,10 +453,6 @@ MIT License - see LICENSE file for details
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open Pull Request
 
-## 📧 Support
 
-For issues and questions, please open a GitHub issue or contact support@musicremix.app
-
----
 
 Built with ❤️ using Next.js, Express, and AI
