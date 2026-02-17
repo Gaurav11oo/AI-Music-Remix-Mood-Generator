@@ -1895,11 +1895,12 @@ async def general_exception_handler(request: Request, exc: Exception):
 # ═══════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "app:app",
+    import os
+
+    port = int(os.environ.get("PORT", 10000))
+
+    app.run(
         host="0.0.0.0",
-        port=8000,
-        reload=settings.DEBUG,
-        log_level="info",
-        workers=1,                 # Use gunicorn for production multi-worker
+        port=port,
+        debug=False
     )
