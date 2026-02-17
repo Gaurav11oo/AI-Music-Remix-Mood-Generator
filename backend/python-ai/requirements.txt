@@ -1,0 +1,180 @@
+# # Flask Framework
+# Flask==3.0.0
+# Flask-CORS==4.0.0
+
+# # Audio Processing
+# librosa==0.10.1
+# soundfile==0.12.1
+# pydub==0.25.1
+# audioread==3.0.1
+
+# # AI/ML Libraries
+# torch==2.1.2
+# torchaudio==2.1.2
+# transformers==4.36.2
+# demucs==4.0.1
+# diffusers==0.25.0
+
+# # Audio Analysis
+# scipy==1.11.4
+# numpy==1.26.3
+# scikit-learn==1.4.0
+# xgboost==2.0.3
+
+# # Utilities
+# python-dotenv==1.0.0
+# requests==2.31.0
+# Pillow==10.2.0
+# matplotlib==3.8.2
+
+# # Optional: For advanced music generation
+# # audiocraft (Meta's MusicGen)
+# # music-tag==0.4.3
+
+# ============================================================
+# requirements.txt
+# AI Music Remix & Mood Generator — Python Dependencies
+# Updated for FastAPI backend (replaces Flask)
+# Tested on Python 3.10 / 3.11 / 3.12
+# ============================================================
+# Install:  pip install -r requirements.txt
+# GPU note: Replace torch lines with the CUDA variant:
+#   pip install torch==2.3.1+cu121 torchaudio==2.3.1+cu121 \
+#       --index-url https://download.pytorch.org/whl/cu121
+# ============================================================
+
+
+# ── Web Framework (FastAPI replaces Flask) ───────────────────
+fastapi==0.115.5
+uvicorn[standard]==0.32.1          # ASGI server (includes httptools + websockets)
+gunicorn==23.0.0                   # Production multi-worker process manager
+starlette==0.41.3                  # FastAPI dependency (pinned for compatibility)
+python-multipart==0.0.12           # Required for UploadFile / Form parsing
+
+
+# ── Authentication & Security ────────────────────────────────
+python-jose[cryptography]==3.3.0   # JWT encode / decode
+passlib[bcrypt]==1.7.4             # Password hashing (bcrypt backend)
+cryptography==43.0.3               # Backend for python-jose
+bcrypt==4.2.1                      # Explicit bcrypt pin (passlib backend)
+
+
+# ── Database ─────────────────────────────────────────────────
+SQLAlchemy==2.0.36                 # ORM (async-compatible v2 API)
+psycopg2-binary==2.9.10            # PostgreSQL adapter (binary for easy install)
+alembic==1.14.0                    # Database migration tool
+asyncpg==0.30.0                    # Async PostgreSQL driver (for async SQLAlchemy)
+
+
+# ── Background Tasks (Celery + Redis) ────────────────────────
+celery==5.4.0                      # Distributed task queue
+redis==5.2.1                       # Redis Python client (Celery broker + result backend)
+kombu==5.4.2                       # Celery messaging library (pinned)
+billiard==4.2.1                    # Celery multiprocessing pool (pinned)
+flower==2.0.1                      # Celery monitoring dashboard (optional)
+
+
+# ── AWS / Object Storage ─────────────────────────────────────
+boto3==1.35.74                     # AWS SDK (S3, presigned URLs)
+botocore==1.35.74                  # boto3 core (pinned to match)
+s3transfer==0.10.4                 # boto3 S3 transfer utility
+
+
+# ── Audio Processing ─────────────────────────────────────────
+librosa==0.10.2.post1              # Audio analysis, feature extraction, time-stretch
+soundfile==0.12.1                  # Low-level PCM read/write (libsndfile wrapper)
+pydub==0.25.1                      # Audio segment manipulation, format conversion
+audioread==3.0.1                   # Multi-backend audio decoding (librosa dependency)
+soxr==0.5.0.post1                  # High-quality resampling (librosa optional backend)
+
+
+# ── PyTorch Ecosystem (CPU builds — see GPU note above) ──────
+torch==2.5.1                       # Deep learning framework
+torchaudio==2.5.1                  # Audio transforms, I/O, resampling (must match torch)
+torchvision==0.20.1                # Required by some HuggingFace pipelines
+
+
+# ── HuggingFace / AI Model Ecosystem ─────────────────────────
+transformers==4.47.0               # HuggingFace Transformers (AST, Whisper, etc.)
+accelerate==1.2.1                  # HuggingFace model acceleration / device mapping
+huggingface-hub==0.26.3            # Model download and caching
+tokenizers==0.21.0                 # Fast tokenizers (transformers dependency)
+safetensors==0.4.5                 # Safe model weight serialization
+datasets==3.2.0                    # HuggingFace datasets (for training mood classifier)
+diffusers==0.32.1                  # Stable Diffusion / Riffusion pipelines
+
+
+# ── Meta MusicGen (audiocraft) ────────────────────────────────
+# Install separately — not on PyPI main index:
+#   pip install audiocraft
+# Or pin to a specific commit:
+#   pip install git+https://github.com/facebookresearch/audiocraft.git@v1.3.0
+# audiocraft==1.3.0                # Uncomment if using local/custom index
+
+
+# ── Stem Separation ───────────────────────────────────────────
+demucs==4.0.1                      # Meta Demucs (htdemucs, htdemucs_6s, mdx)
+# spleeter==2.3.2                  # Deezer Spleeter (fallback — requires TF 2.x, conflicts)
+
+
+# ── Audio ML / Scientific Computing ─────────────────────────
+scipy==1.14.1                      # Signal processing, filters, STFT utilities
+numpy==2.1.3                       # Numerical arrays (core dependency for all above)
+scikit-learn==1.5.2                # RandomForest, LabelEncoder, cross_val_score
+xgboost==2.1.3                     # XGBoost mood classifier
+
+
+# ── Audio Effects & DSP ──────────────────────────────────────
+pedalboard==0.9.14                 # Spotify audio effects (reverb, EQ, compression)
+pyloudnorm==0.1.1                  # ITU-R BS.1770 LUFS loudness normalization
+noisereduce==3.0.3                 # Noise reduction (Wiener filter)
+pyrubberband==0.3.3                # libRubberBand high-quality pitch/time (optional)
+
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv==1.0.1               # .env file loading
+Pillow==11.0.0                     # Image processing (Riffusion spectrogram)
+matplotlib==3.9.3                  # Plotting (spectrogram export, debugging)
+requests==2.32.3                   # HTTP client (model downloads, webhooks)
+httpx==0.28.1                      # Async HTTP client (used by FastAPI TestClient)
+aiofiles==24.1.0                   # Async file I/O
+click==8.1.7                       # CLI utilities (Celery/management commands)
+rich==13.9.4                       # Pretty terminal output / logging
+pydantic==2.10.3                   # Data validation (FastAPI uses this natively)
+pydantic-settings==2.6.1           # Settings management from env vars
+email-validator==2.2.0             # EmailStr validation in Pydantic
+
+
+# ── Data Serialization ───────────────────────────────────────
+orjson==3.10.12                    # Fast JSON (FastAPI optional speedup)
+ujson==5.10.0                      # Ultra-fast JSON fallback
+msgpack==1.1.0                     # Binary serialization for Celery payloads
+
+
+# ── Monitoring & Observability ───────────────────────────────
+prometheus-fastapi-instrumentator==7.0.0  # Prometheus metrics endpoint
+opentelemetry-sdk==1.29.0          # Distributed tracing
+sentry-sdk[fastapi]==2.19.2        # Error tracking (optional)
+structlog==24.4.0                  # Structured logging
+
+
+# ── Testing ──────────────────────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.24.0             # Async test support
+pytest-cov==6.0.0                  # Coverage reporting
+httpx==0.28.1                      # FastAPI async test client (already listed above)
+factory-boy==3.3.1                 # Test data factories
+faker==33.1.0                      # Fake data generation
+
+
+# ── Development / Linting ────────────────────────────────────
+# (install with: pip install -r requirements-dev.txt  or  pip install .[dev])
+# ruff==0.8.4
+# black==24.10.0
+# mypy==1.13.0
+# pre-commit==4.0.1
+
+
+# ── Removed from original (incompatible with FastAPI stack) ──
+# Flask==3.0.0           → replaced by fastapi + uvicorn
+# Flask-CORS==4.0.0      → replaced by fastapi CORSMiddleware (built-in)
