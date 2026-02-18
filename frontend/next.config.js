@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     domains: ["localhost"],
   },
+<<<<<<< HEAD
 
   async rewrites() {
     return [
@@ -16,6 +17,16 @@ const nextConfig = {
     ];
   },
 
+=======
+async rewrites() {
+  return [
+    {
+      source: "/api/:path*",
+      destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+    },
+  ];
+}
+>>>>>>> 1a2f358b7fb7f86951d9939e6dad98b1e396c872
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
