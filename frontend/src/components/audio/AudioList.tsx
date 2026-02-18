@@ -1,23 +1,37 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { Music, Download, Trash2, Play, Pause, MoreVertical } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { audioAPI } from '@/lib/api';
-import { useAudioStore } from '@/lib/store';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { formatBytes, formatDuration } from '@/lib/utils';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from "react";
+import {
+  Music,
+  Download,
+  Trash2,
+  Play,
+  Pause,
+  MoreVertical,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { audioAPI } from "@/lib/api";
+import { useAudioStore } from "@/lib/store";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { formatBytes, formatDuration } from "@/lib/utils";
+import toast from "react-hot-toast";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export function AudioList() {
-  const { audioFiles, setAudioFiles, removeAudioFile, selectAudio, selectedAudio } = useAudioStore();
+  const {
+    audioFiles,
+    setAudioFiles,
+    removeAudioFile,
+    selectAudio,
+    selectedAudio,
+  } = useAudioStore();
   const [loading, setLoading] = useState(true);
   const [playingId, setPlayingId] = useState<number | null>(null);
 
@@ -30,7 +44,7 @@ export function AudioList() {
       const response = await audioAPI.list();
       setAudioFiles(response.data.data.audioFiles);
     } catch (error: any) {
-      toast.error('Failed to load audio files');
+      toast.error("Failed to load audio files");
     } finally {
       setLoading(false);
     }
@@ -38,35 +52,39 @@ export function AudioList() {
 
   const handleDelete = async (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
-    
-    if (!confirm('Are you sure you want to delete this audio file?')) {
+
+    if (!confirm("Are you sure you want to delete this audio file?")) {
       return;
     }
 
     try {
       await audioAPI.delete(id);
       removeAudioFile(id);
-      toast.success('Audio file deleted');
+      toast.success("Audio file deleted");
     } catch (error: any) {
-      toast.error('Failed to delete audio file');
+      toast.error("Failed to delete audio file");
     }
   };
 
-  const handleDownload = async (id: number, filename: string, e: React.MouseEvent) => {
+  const handleDownload = async (
+    id: number,
+    filename: string,
+    e: React.MouseEvent
+  ) => {
     e.stopPropagation();
-    
+
     try {
       const response = await audioAPI.download(id);
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', filename);
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
       link.remove();
-      toast.success('Download started');
+      toast.success("Download started");
     } catch (error: any) {
-      toast.error('Failed to download audio file');
+      toast.error("Failed to download audio file");
     }
   };
 
@@ -106,7 +124,7 @@ export function AudioList() {
         >
           <Card
             className={`cursor-pointer transition-all hover:shadow-lg ${
-              selectedAudio?.id === audio.id ? 'ring-2 ring-primary' : ''
+              selectedAudio?.id === audio.id ? "ring-2 ring-primary" : ""
             }`}
             onClick={() => selectAudio(audio)}
           >
@@ -121,23 +139,31 @@ export function AudioList() {
                       {audio.original_name}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {audio.format?.toUpperCase()} • {formatBytes(audio.file_size)}
+                      {audio.format?.toUpperCase()} •{" "}
+                      {formatBytes(audio.file_size)}
                     </p>
                   </div>
                 </div>
 
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                  <DropdownMenuTrigger
+                    asChild
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Button variant="ghost" size="icon">
                       <MoreVertical className="w-4 h-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={(e) => handleDownload(audio.id, audio.original_name, e as any)}>
+                    <DropdownMenuItem
+                      onClick={(e) =>
+                        handleDownload(audio.id, audio.original_name, e as any)
+                      }
+                    >
                       <Download className="w-4 h-4 mr-2" />
                       Download
                     </DropdownMenuItem>
-                    <DropdownMenuItem 
+                    <DropdownMenuItem
                       onClick={(e) => handleDelete(audio.id, e as any)}
                       className="text-destructive"
                     >
@@ -152,7 +178,7 @@ export function AudioList() {
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Duration</span>
                   <span className="text-foreground font-medium">
-                    {audio.duration ? formatDuration(audio.duration) : 'N/A'}
+                    {audio.duration ? formatDuration(audio.duration) : "N/A"}
                   </span>
                 </div>
                 {audio.sample_rate && (
@@ -167,7 +193,7 @@ export function AudioList() {
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Channels</span>
                     <span className="text-foreground font-medium">
-                      {audio.channels === 1 ? 'Mono' : 'Stereo'}
+                      {audio.channels === 1 ? "Mono" : "Stereo"}
                     </span>
                   </div>
                 )}
