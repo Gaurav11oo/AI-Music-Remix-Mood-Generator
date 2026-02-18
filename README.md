@@ -285,154 +285,76 @@ Point `DATABASE_URL` and `REDIS_URL` at your Render managed instances, then run 
 ## 📁 Project Structure
 
 ```
-AI-Music-Remix-Mood-Generator/
-│
-├── backend/                          # Python FastAPI backend
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py                   # FastAPI app entry point
-│   │   ├── celery_app.py             # Celery configuration
-│   │   ├── config.py                 # Pydantic Settings
-│   │   │
-│   │   ├── api/
-│   │   │   ├── v1/
-│   │   │   │   ├── router.py         # Aggregate router
-│   │   │   │   ├── auth.py
-│   │   │   │   ├── audio.py
-│   │   │   │   ├── stems.py
-│   │   │   │   ├── mood.py
-│   │   │   │   ├── generate.py
-│   │   │   │   ├── remix.py
-│   │   │   │   └── jobs.py
-│   │   │
-│   │   ├── core/
-│   │   │   ├── security.py           # JWT, password hashing
-│   │   │   ├── dependencies.py       # FastAPI DI (DB session, current user)
-│   │   │   ├── exceptions.py
-│   │   │   └── middleware.py         # Rate limiting, logging
-│   │   │
-│   │   ├── db/
-│   │   │   ├── base.py               # SQLAlchemy async engine
-│   │   │   ├── session.py
-│   │   │   └── models/
-│   │   │       ├── user.py
-│   │   │       ├── audio_file.py
-│   │   │       ├── processing_job.py
-│   │   │       ├── mood_classification.py
-│   │   │       ├── stem.py
-│   │   │       ├── remix.py
-│   │   │       └── generated_track.py
-│   │   │
-│   │   ├── schemas/                  # Pydantic v2 schemas
-│   │   │   ├── auth.py
-│   │   │   ├── audio.py
-│   │   │   ├── job.py
-│   │   │   ├── mood.py
-│   │   │   └── remix.py
-│   │   │
+music-remix-app/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── database.js
+│   │   │   └── redis.js
+│   │   ├── controllers/
+│   │   │   ├── authController.js
+│   │   │   ├── audioController.js
+│   │   │   ├── stemController.js
+│   │   │   ├── moodController.js
+│   │   │   └── remixController.js
+│   │   ├── middleware/
+│   │   │   ├── auth.js
+│   │   │   ├── upload.js
+│   │   │   └── errorHandler.js
+│   │   ├── models/
+│   │   │   ├── User.js
+│   │   │   ├── AudioFile.js
+│   │   │   ├── ProcessingJob.js
+│   │   │   └── MoodClassification.js
+│   │   ├── routes/
+│   │   │   ├── auth.js
+│   │   │   ├── audio.js
+│   │   │   ├── stems.js
+│   │   │   ├── mood.js
+│   │   │   └── remix.js
 │   │   ├── services/
-│   │   │   ├── s3_service.py         # AWS S3 operations
-│   │   │   ├── audio_service.py      # Upload, metadata extraction
-│   │   │   └── job_service.py        # Job creation + status tracking
-│   │   │
-│   │   ├── tasks/                    # Celery tasks
-│   │   │   ├── stem_tasks.py         # Demucs / Spleeter
-│   │   │   ├── mood_tasks.py         # ML mood classifier
-│   │   │   ├── remix_tasks.py        # Genre, tempo, pitch
-│   │   │   ├── generate_tasks.py     # MusicGen / Riffusion
-│   │   │   └── audio_tasks.py        # Waveform, spectrogram
-│   │   │
-│   │   └── ml/                       # AI/ML modules
-│   │       ├── stem_separator.py     # Demucs wrapper
-│   │       ├── mood_classifier.py    # XGBoost + scikit-learn
-│   │       ├── music_generator.py    # MusicGen / Stable Audio
-│   │       ├── riffusion.py          # Riffusion integration
-│   │       └── audio_utils.py        # Librosa, Pydub helpers
-│   │
-│   ├── alembic/                      # DB migration files
-│   │   ├── env.py
-│   │   └── versions/
-│   │
-│   ├── tests/
-│   │   ├── conftest.py
-│   │   ├── test_auth.py
-│   │   ├── test_audio.py
-│   │   ├── test_stems.py
-│   │   └── test_mood.py
-│   │
-│   ├── Dockerfile
-│   ├── Dockerfile.worker             # Celery worker image
-│   ├── requirements.txt
-│   ├── requirements-dev.txt
+│   │   │   ├── audioService.js
+│   │   │   ├── queueService.js
+│   │   │   └── pythonAIService.js
+│   │   ├── workers/
+│   │   │   └── audioWorker.js
+│   │   └── app.js
+│   ├── python-ai/
+│   │   ├── models/
+│   │   │   ├── stem_separator.py
+│   │   │   ├── mood_classifier.py
+│   │   │   └── music_generator.py
+│   │   ├── utils/
+│   │   │   └── audio_utils.py
+│   │   ├── app.py
+│   │   └── requirements.txt
+│   ├── package.json
 │   └── .env.example
-│
-├── frontend/                         # Next.js 14 frontend
+├── frontend/
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── layout.tsx
-│   │   │   ├── page.tsx              # Landing page
 │   │   │   ├── (auth)/
-│   │   │   │   ├── login/page.tsx
-│   │   │   │   └── register/page.tsx
-│   │   │   ├── dashboard/page.tsx
-│   │   │   ├── upload/page.tsx
-│   │   │   ├── stems/page.tsx
-│   │   │   ├── mood/page.tsx
-│   │   │   ├── remix/page.tsx
-│   │   │   └── generate/page.tsx
-│   │   │
+│   │   │   ├── dashboard/
+│   │   │   ├── upload/
+│   │   │   ├── remix/
+│   │   │   └── layout.tsx
 │   │   ├── components/
 │   │   │   ├── audio/
-│   │   │   │   ├── WaveformPlayer.tsx
-│   │   │   │   ├── Spectrogram.tsx
-│   │   │   │   ├── StemMixer.tsx
-│   │   │   │   └── AudioDropzone.tsx
-│   │   │   ├── remix/
-│   │   │   │   ├── GenreSelector.tsx
-│   │   │   │   ├── TempoSlider.tsx
-│   │   │   │   └── PitchControl.tsx
-│   │   │   ├── mood/
-│   │   │   │   ├── MoodRadar.tsx
-│   │   │   │   └── FeatureChart.tsx
-│   │   │   ├── generate/
-│   │   │   │   ├── PromptBuilder.tsx
-│   │   │   │   └── ModelSelector.tsx
-│   │   │   ├── jobs/
-│   │   │   │   └── JobProgressCard.tsx
-│   │   │   └── ui/                   # Shadcn UI components
-│   │   │
-│   │   ├── hooks/
-│   │   │   ├── useWebSocket.ts       # Real-time job updates
-│   │   │   ├── useWaveSurfer.ts
-│   │   │   └── useAudioAnalyser.ts
-│   │   │
+│   │   │   ├── ui/
+│   │   │   └── layout/
 │   │   ├── lib/
-│   │   │   ├── api.ts                # Axios instance + interceptors
-│   │   │   ├── store/
-│   │   │   │   ├── authStore.ts      # Zustand auth slice
-│   │   │   │   ├── audioStore.ts
-│   │   │   │   └── jobStore.ts
-│   │   │   └── utils.ts
-│   │   │
-│   │   └── types/
-│   │       └── index.ts
-│   │
-│   ├── public/
+│   │   │   ├── api.ts
+│   │   │   └── store.ts
+│   │   └── styles/
 │   ├── package.json
-│   ├── tailwind.config.ts
-│   ├── next.config.ts
 │   └── .env.local.example
-│
-├── .github/
-│   └── workflows/
-│       ├── ci.yml                    # Test + lint on PR
-│       ├── cd-backend.yml            # Deploy backend to Render
-│       └── cd-frontend.yml           # Deploy frontend to Vercel
-│
-├── render.yaml                       # Render Blueprint (IaC)
-├── Makefile                          # Helper commands
+├── docs/
+│   ├── API.md
+│   ├── DEPLOYMENT.md
+│   └── ARCHITECTURE.md
 └── README.md
 ```
+
 
 ---
 
