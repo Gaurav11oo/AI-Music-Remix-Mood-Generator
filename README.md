@@ -449,47 +449,35 @@ Auto-deploys on every push to `main` once the Vercel GitHub integration is conne
 
 ---
 
-## 🧪 Testing
+## 📈 Testing
 
-### Backend
+1. **Install Dependencies**:
+   ```bash
+   cd backend && npm install
+   cd frontend && npm install
+   cd backend/python-ai && pip install -r requirements.txt
+   ```
+2. **Configure Environment**:
+   - Set up PostgreSQL database
+   - Configure Redis
+   - Update .env files
 
-```bash
-cd backend
-source .venv/bin/activate
+3. **Implement AI Models**:
+   - Add Demucs model code
+   - Implement mood classifier
+   - Add music generation
 
-# Run all tests
-pytest tests/ -v
+4. **Build Frontend Pages**:
+   - Create auth pages
+   - Build dashboard
+   - Add upload interface
 
-# With coverage report
-pytest tests/ --cov=app --cov-report=html --cov-report=term-missing
+5. **Deploy**:
+   - Frontend to Vercel
+   - Backend to AWS/Render
+   - Configure domain and SSL
 
-# Specific test module
-pytest tests/test_stems.py -v
-
-# Run with async support
-pytest tests/ -v --asyncio-mode=auto
-```
-
-### Frontend
-
-```bash
-cd frontend
-
-# Unit tests
-npm test
-
-# Watch mode
-npm run test:watch
-
-# E2E tests (Playwright)
-npm run test:e2e
-
-# Type checking
-npm run type-check
-
-# Lint
-npm run lint
-```
+## 🎉 You're Ready!
 
 ---
 
@@ -523,8 +511,6 @@ npm run lint
 ---
 
 ## 📚 API Documentation
-
-Auto-generated OpenAPI docs are available at runtime:
 
 | URL | Interface |
 |---|---|
