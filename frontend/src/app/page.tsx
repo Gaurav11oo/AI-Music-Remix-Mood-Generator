@@ -181,7 +181,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="relative z-10 container mx-auto px-6 py-12 text-center border-t border-purple-500/20">
         <p className="text-purple-300">
-          2024 SonicAI. Transforming music with artificial intelligence.
+          2026 SonicAI. Transforming music with artificial intelligence.
         </p>
       </footer>
     </div>
