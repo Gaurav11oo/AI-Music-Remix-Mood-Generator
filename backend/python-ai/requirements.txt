@@ -19,7 +19,7 @@ bcrypt==4.2.1                      # Explicit bcrypt pin (passlib backend)
 
 # ── Database ─────────────────────────────────────────────────
 SQLAlchemy==2.0.36                 # ORM (async-compatible v2 API)
-psycopg2         # PostgreSQL adapter (binary for easy install)
+psycopg2-binary==2.9.9       # PostgreSQL adapter (binary for easy install)
 alembic==1.14.0                    # Database migration tool
 asyncpg==0.30.0                    # Async PostgreSQL driver (for async SQLAlchemy)
 
