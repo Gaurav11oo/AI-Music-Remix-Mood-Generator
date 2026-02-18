@@ -199,8 +199,6 @@ REDIS_HOST=localhost
 REDIS_PORT=6379
 REDIS_PASSWORD=
 REDIS_URL=redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}/0
-CELERY_BROKER_URL=redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}/1
-CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}/2
 
 # ── JWT ───────────────────────────────────────────────────
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
@@ -216,21 +214,6 @@ MAX_FILE_SIZE=104857600                       # bytes (100 MB)
 MAX_UPLOAD_SIZE_MB=100
 ALLOWED_AUDIO_FORMATS=mp3,wav,flac,ogg,m4a,aac
 MAX_AUDIO_DURATION_SECONDS=600
-
-# ── AWS S3 ────────────────────────────────────────────────
-AWS_ACCESS_KEY_ID=your-access-key-id
-AWS_SECRET_ACCESS_KEY=your-secret-access-key
-AWS_REGION=us-east-1
-S3_BUCKET_NAME=music-remix-storage
-S3_PRESIGNED_URL_EXPIRY=3600
-
-# ── AI Model Settings ─────────────────────────────────────
-HUGGINGFACE_TOKEN=hf_your_token_here
-MUSICGEN_MODEL=facebook/musicgen-small        # or musicgen-medium / musicgen-large
-RIFFUSION_MODEL=riffusion/riffusion-model-v1
-DEMUCS_MODEL=htdemucs_ft
-DEVICE=cuda                                   # cuda | cpu
-TORCH_DTYPE=float16                           # float16 | float32
 
 # ── CORS ──────────────────────────────────────────────────
 CORS_ORIGIN=http://localhost:3000
