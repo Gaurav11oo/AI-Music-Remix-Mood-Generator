@@ -1,48 +1,6 @@
-# # Flask Framework
-# Flask==3.0.0
-# Flask-CORS==4.0.0
-
-# # Audio Processing
-# librosa==0.10.1
-# soundfile==0.12.1
-# pydub==0.25.1
-# audioread==3.0.1
-
-# # AI/ML Libraries
-# torch==2.1.2
-# torchaudio==2.1.2
-# transformers==4.36.2
-# demucs==4.0.1
-# diffusers==0.25.0
-
-# # Audio Analysis
-# scipy==1.11.4
-# numpy==1.26.3
-# scikit-learn==1.4.0
-# xgboost==2.0.3
-
-# # Utilities
-# python-dotenv==1.0.0
-# requests==2.31.0
-# Pillow==10.2.0
-# matplotlib==3.8.2
-
-# # Optional: For advanced music generation
-# # audiocraft (Meta's MusicGen)
-# # music-tag==0.4.3
-
-# ============================================================
-# requirements.txt
-# AI Music Remix & Mood Generator — Python Dependencies
-# Updated for FastAPI backend (replaces Flask)
-# Tested on Python 3.10 / 3.11 / 3.12
-# ============================================================
-# Install:  pip install -r requirements.txt
-# GPU note: Replace torch lines with the CUDA variant:
-#   pip install torch==2.3.1+cu121 torchaudio==2.3.1+cu121 \
-#       --index-url https://download.pytorch.org/whl/cu121
-# ============================================================
-
+pip>=26.0.1
+setuptools>=69.0
+wheel
 
 # ── Web Framework (FastAPI replaces Flask) ───────────────────
 fastapi==0.115.5
@@ -61,7 +19,7 @@ bcrypt==4.2.1                      # Explicit bcrypt pin (passlib backend)
 
 # ── Database ─────────────────────────────────────────────────
 SQLAlchemy==2.0.36                 # ORM (async-compatible v2 API)
-psycopg2-binary==2.9.10            # PostgreSQL adapter (binary for easy install)
+psycopg2         # PostgreSQL adapter (binary for easy install)
 alembic==1.14.0                    # Database migration tool
 asyncpg==0.30.0                    # Async PostgreSQL driver (for async SQLAlchemy)
 
@@ -87,19 +45,17 @@ pydub==0.25.1                      # Audio segment manipulation, format conversi
 audioread==3.0.1                   # Multi-backend audio decoding (librosa dependency)
 soxr==0.5.0.post1                  # High-quality resampling (librosa optional backend)
 
-
-# ── PyTorch Ecosystem (CPU builds — see GPU note above) ──────
-torch==2.5.1                       # Deep learning framework
-torchaudio==2.5.1                  # Audio transforms, I/O, resampling (must match torch)
-torchvision==0.20.1                # Required by some HuggingFace pipelines
-
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchaudio
+torchvision
 
 # ── HuggingFace / AI Model Ecosystem ─────────────────────────
 transformers==4.47.0               # HuggingFace Transformers (AST, Whisper, etc.)
 accelerate==1.2.1                  # HuggingFace model acceleration / device mapping
 huggingface-hub==0.26.3            # Model download and caching
 tokenizers==0.21.0                 # Fast tokenizers (transformers dependency)
-safetensors==0.4.5                 # Safe model weight serialization
+safetensors==0.4.3 --only-binary=:all:  # Safe model weight serialization
 datasets==3.2.0                    # HuggingFace datasets (for training mood classifier)
 diffusers==0.32.1                  # Stable Diffusion / Riffusion pipelines
 

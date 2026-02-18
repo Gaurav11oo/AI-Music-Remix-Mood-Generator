@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: music-ai
+    runtime: python
+    rootDir: backend/python-ai
+    buildCommand: bash build.sh && pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PORT
+        value: 10000
